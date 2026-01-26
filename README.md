@@ -2,7 +2,7 @@ GOWARS
 Gowars is a reverse engineering project to revive the historic DECWAR game that was written at the University of Texas at Austin by Bob Hysick and Jeff Potter around 1979.  An online version is available at gowars.net port 1701.
 
 Description
-The code for DECWAR has been lost. Gowars is based on the 2.2 version of the executable and documentation that was released by DECUS.
+The code for DECWAR has been lost. Gowars is based on the 2.2 version of the executable and documentation that was released by DECUS.  There are minor differences between the original game and Gowars, including an improved command line interface, operators in the list command, support for multiple concurrent games at once, and an optional modern version (gowars mode) that supports tractoring non-ships and a different "fog of war".  Future releases will add operators in the list command and more features in gowars mode.
 
 Execution
 Download gowars.go
