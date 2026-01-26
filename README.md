@@ -6,6 +6,7 @@ The code for DECWAR has been lost. Gowars is based on the 2.2 version of the exe
 
 Execution
 Download gowars.go
+
 go run gowars.go
 
 Telnet to port localhost:1701
