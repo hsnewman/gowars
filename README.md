@@ -8,33 +8,33 @@ The code for DECWAR has been lost. Gowars is based on the 2.2 version of the exe
   The time output includes the time since creation for the galaxy your in
   The users command outputs information for tcp/ip
   The type output and type options commands is updated for more information for Gowars
-  For all situational awareness commands (list/bases/planets etc), decwar's information is based on what other ships have "listed".  Gowars mode is based on all objects within range of a friendly ship.
+  For all situational awareness commands (list/bases/planets etc), decwar's information is based on what other ships have "listed".  Gowars mode is based on all objects within range of a friendly ship.  
   
-  An improved command line interface:
-    Supporting command history
-    Command line editing
-    Parameter parsing
-    Special characters:
-      Enter: Submit command.
-      Backspace/Delete: Delete last character.
-      Ctrl+A (ASCII 1): Move cursor to beginning of line.
-      Ctrl+B (ASCII 2): Move cursor left.
-      Ctrl+C(ASCII 3): Cancel command queue and interrupt output.
-      Ctrl+E (ASCII 5): Move cursor to end of line.
-      Ctrl+F (ASCII 6): Move cursor right.
-      Ctrl+K (ASCII 11): Delete to end of line.
-      Ctrl+L (ASCII 12): Clears the terminal screen.
-      Tab (ASCII 9): Command/parameter completion.
-      Escape (ASCII 27): Command completion or repeat last command.
-   
-  The list command does not support:
-    And             Used to separate groups of keywords.
-    &               Same as AND.
-  Support for multiple concurrent games at once (with different sizes)
-  An optional modern version (gowars mode) that supports:
-    Tractoring non-ships
-    A different "fog of war".  
-    Towing of any object
+  An improved command line interface:  
+    Supporting command history  
+    Command line editing  
+    Parameter parsing  
+    Special characters:  
+      Enter: Submit command.  
+      Backspace/Delete: Delete last character.  
+      Ctrl+A (ASCII 1): Move cursor to beginning of line.  
+      Ctrl+B (ASCII 2): Move cursor left.  
+      Ctrl+C(ASCII 3): Cancel command queue and interrupt output.  
+      Ctrl+E (ASCII 5): Move cursor to end of line.  
+      Ctrl+F (ASCII 6): Move cursor right.  
+      Ctrl+K (ASCII 11): Delete to end of line.  
+      Ctrl+L (ASCII 12): Clears the terminal screen.  
+      Tab (ASCII 9): Command/parameter completion.  
+      Escape (ASCII 27): Command completion or repeat last command.  
+     
+  The list command does not support:  
+    And             Used to separate groups of keywords.  
+    &               Same as AND.  
+  Support for multiple concurrent games at once (with different sizes)  
+  An optional modern version (gowars mode) that supports:  
+    Tractoring non-ships  
+    A different "fog of war".    
+    Towing of any object  
 
 Execution
 Download gowars.go
