@@ -5,6 +5,7 @@ An online version is available at gowars.net port 1701.
 
 Description:
 The code for DECWAR has been lost. Gowars is based on the 2.2 version of the executable and documentation that was released by DECUS.  There are minor differences between the original game and Gowars including:
+
     * The activate command has additional parameters allowing defining the side your want to be on, if the galaxy is empty what size the galaxy is, how many of each object should be in the galaxy, and the max number of bases per side.
     * The admin command allows for many testing commands
     * The time output includes the time since creation for the galaxy your in
