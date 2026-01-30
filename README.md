@@ -8,54 +8,55 @@ Description: The code for DECWAR has been lost. Gowars is based on the 2.2 versi
 
 * A configurable number of galaxies/stars/planets/etc.
 * The activate command has additional parameters allowing defining the side your want to be on, if the galaxy is empty what size the galaxy is, how many of each object should be in the galaxy, and the max number of bases per side.
-* The admin command allows for many testing commands
-* The time output includes the time since creation for the galaxy your in
-* The users command outputs information for tcp/ip
-* The type output and type options commands is updated for more information for Gowars
-* For all situational awareness commands (list/bases/planets etc), decwar's information is based on what other ships have "listed".  Gowars mode is based on all objects within range of a friendly ship.
-* The tell command doesn't require a ; after the receiver's name
+* A new command, 'admin', which allows for many testing commands
+* The time output has been modified for running in a modern environment and with multiple galaxies
+* The users command has been modified for running in a modern environment and with multiple galaxies
+* The type output and type options commands is updated has been modified for running in a modern environment and with multiple galaxies
+* For all situational awareness commands (list/bases/planets etc), decwar's information is based on what other ships have "listed" to mimic Decwar.  Gowars mode situational awareness commands are based on all objects within range of a friendly ship.
+* The tell command doesn't require a ';' after the receiver's name
 * The summary command in pregame shows grand totals of all galaxies
 * The points command is currently not implemented due to the no authentication design of the game.
-* Baud rate is simulated.  In gowars mode baud defaults to 0, while in decwars mode it defaults to 9600.  The Set command supports changing baud to 300, 1200.2400 and 9600, in decwars mode if the user is an administrator they can set their baud to 0.
-* If a connection has a ship destroyed, there is a 2 minute cooldown period, which occurs if they try to re-enter the same galaxy.
-* A web interface that shows the each galaxy in "set scan short" mode with hover pop-ups showing that object's status and damages.
+* Baud rate is simulated.  In gowars mode baud defaults to 0, while in decwars mode it defaults to 9600.  The Set command supports changing baud to 300, 1200.2400 and 9600.  In Decwars mode if the user is an administrator they can set their baud to 0.
+* If a connection has a ship destroyed, there is a 2 minute cooldown period, which occurs if they try to re-enter the same galaxy to mimic Decwar.
+* A web interface has been added that shows the each galaxy in "set scan short" mode with hover pop-ups showing that object's status and damages.
 * The code also supports web debugging via pprof, on port 6060
 
-* An improved command line interface:
+* An improved command line interface supporting:
     * Command history
     * Command line editing
     * Parameter parsing
     * Contextual prompting (he<tab>) and parameter prompting (srsscan ?)
     * Special characters:
         Enter: Submit command.
-        Backspace/Delete: Delete last character.
-        Ctrl+A (ASCII 1): Move cursor to beginning of line.
-        Ctrl+B (ASCII 2): Move cursor left.
-        Ctrl+C(ASCII 3): Cancel command queue and interrupt output.
-        Ctrl+E (ASCII 5): Move cursor to end of line.
-        Ctrl+F (ASCII 6): Move cursor right.
+        Backspace/Delete:  Delete last character.
+        Ctrl+A (ASCII 1):  Move cursor to beginning of line.
+        Ctrl+B (ASCII 2):  Move cursor left.
+        Ctrl+C (ASCII 3):  Cancel command queue and interrupt output.
+        Ctrl+E (ASCII 5):  Move cursor to end of line.
+        Ctrl+F (ASCII 6):  Move cursor right.
         Ctrl+K (ASCII 11): Delete to end of line.
         Ctrl+L (ASCII 12): Clears the terminal screen.
-        Tab (ASCII 9): Command/parameter completion.
+        Tab (ASCII 9):     Command/parameter completion.
         Escape (ASCII 27): Command completion or repeat last command.
+        
 Notes: 
 
-* The list command does not support: And Used to separate groups of keywords. & Same as AND. 
-* Support for multiple concurrent games at once (with different sizes) 
+* The list command does not support: 'And', '&', which is used to separate groups of keywords  
+* Support for multiple concurrent games at once (with different sizes and objects configurable) 
 * An optional modern version (gowars mode) that supports: 
-    * Tractoring non-ships * A different "fog of war". 
+    * Tractoring non-ships 
+    * A different "fog of war" for situational awareness commands
     * Towing of any object
 
 System design: 
     * A basic telnet server along with support for some telent commands (AYT)
-    * An atomic State Engine manages concurrency by running all commands (for a given galaxy) that are state-changing sequentially, while a seperate processor (per ship) runs all non-state-changing commands seperately.
-    * Tested with multiple galaxies and users
+    * An atomic State Engine manages concurrency by running all commands (for a given galaxy) that are state-changing sequentially, while a seperate command processor (per ship) runs all non-state-changing commands seperately
 
 Execution: Download gowars.go
 
-go run gowars.go
+           go run gowars.go
 
-Telnet to port localhost:1701
+           Telnet to port localhost:1701
 
 Licensing & Copyright: Copyright © 2026 Harris S. Newman Consulting
 
