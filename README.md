@@ -1,6 +1,6 @@
 GOWARS 
 
-Gowars is a reverse engineering project to mimic and revive the historic DECWAR game that was written at the University of Texas at Austin by Bob Hysick and Jeff Potter around 1979. Care has been taken to have the game mechanics as accurate to the original game as possible.
+Gowars is a reverse engineering project to mimic and revive the historic DECWAR game that was written at the University of Texas at Austin by Bob Hysick and Jeff Potter around 1979. Care has been taken to have the game mechanics and command structure as accurate to the original game as possible.
 
 An online version is available at gowars.net port 1701.
 
@@ -20,14 +20,12 @@ Description: The code for DECWAR has been lost. Gowars is based on the 2.2 versi
 * If a connection has a ship destroyed, there is a 2 minute cooldown period, which occurs if they try to re-enter the same galaxy to mimic Decwar.
 * A web interface has been added that shows the each galaxy in "set scan short" mode with hover pop-ups showing that object's status and damages.
 * The code also supports web debugging via pprof, on port 6060
-
 * An improved command line interface supporting:
     * Command history
     * Command line editing
     * Parameter parsing
     * Contextual prompting (he<tab>) and parameter prompting (srsscan ?)
     * Special characters:
-    
         Enter: Submit command.
         Backspace/Delete:  Delete last character.
         Ctrl+A (ASCII 1):  Move cursor to beginning of line.
@@ -50,6 +48,7 @@ Notes:
     * Towing of any object
 
 System design: 
+
     * A basic telnet server along with support for some telent commands (AYT)
     * An atomic State Engine manages concurrency by running all commands (for a given galaxy) that are state-changing sequentially, while a seperate command processor (per ship) runs all non-state-changing commands seperately
 
