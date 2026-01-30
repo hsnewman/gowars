@@ -25,6 +25,7 @@ Description: The code for DECWAR has been lost. Gowars is based on the 2.2 versi
     * Command history
     * Command line editing
     * Parameter parsing
+    * Contextual prompting (he<tab>) and parameter prompting (srsscan ?)
     * Special characters:
         Enter: Submit command.
         Backspace/Delete: Delete last character.
