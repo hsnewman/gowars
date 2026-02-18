@@ -19,6 +19,7 @@ Description: The code for DECWAR has been lost. Gowars is based on the 2.2 versi
 * Baud rate is simulated.  In gowars mode baud defaults to 0, while in decwars mode it defaults to 9600.  The Set command supports changing baud to 300, 1200.2400 and 9600.  In Decwars mode if the user is an administrator they can set their baud to 0.
 * If a connection has a ship destroyed, there is a 2 minute cooldown period, which occurs if they try to re-enter the same galaxy to mimic Decwar.
 * A web interface has been added that shows the each galaxy in "set scan short" mode with hover pop-ups showing that object's status and damages.
+* A telnet web client with a built in proxy.
 * The code also supports web debugging via pprof, on port 6060
 * An improved command line interface supporting:
     * Command history
