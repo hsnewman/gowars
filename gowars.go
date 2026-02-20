@@ -5070,7 +5070,12 @@ func (i *Interpreter) torpedoAttack(attacker *Object, vpos, hpos, numTorps int, 
 	}
 
 	result := ""
+	burstAborted := false // mirrors decwar iflg: set negative on misfire to abort remaining torpedoes
 	for torpCount := 0; torpCount < numTorps; torpCount++ {
+		// Decwar: if (iflg .lt. 0) goto 2400 — skip remaining torpedoes after a misfire
+		if burstAborted {
+			break
+		}
 		if attacker.TorpedoTubes < 1 {
 			result += fmt.Sprintf("Insufficient torpedoes for burst!\n\r%d torpedos left.\n\r", attacker.TorpedoTubes)
 			break
@@ -5079,6 +5084,22 @@ func (i *Interpreter) torpedoAttack(attacker *Object, vpos, hpos, numTorps int, 
 		attacker.TorpedoTubes--
 
 		deflection := i.calculateTorpedoDeflection(attacker)
+
+		// Decwar misfire check: iran(100) > 96, i.e. 4% chance per torpedo.
+		// The misfired torpedo still travels — just with extra deflection.
+		// The remainder of the burst is aborted (iflg = -1).
+		// There is also a 1-in-5 chance of photon tube damage on a misfire.
+		if rand.Intn(100) > 96 {
+			result += fmt.Sprintf("Torpedo %d MISFIRES!\n\r", torpCount+1)
+			deflection += (rand.Float64() - 0.5) / 5.0 // decwar: d = d + (ran(0)-0.5)/5.0
+			burstAborted = true                         // abort torpedoes after this one
+			// Decwar: if (iran(5) .ne. 5) goto 900 — 1-in-5 chance of tube damage
+			if rand.Intn(5) == 0 {
+				attacker.TorpedoTubeDamage += 500 + rand.Intn(3000) // decwar: 500 + iran(3000)
+				result += "PHOTON TUBES DAMAGED!\n\r"
+			}
+		}
+
 		actualTargetIdx, objectfound, endX, endY := i.torpedoPathLocked(attacker.LocationX, attacker.LocationY, vpos, hpos, attacker.Galaxy, deflection)
 
 		if !objectfound {
@@ -18210,11 +18231,32 @@ func (i *Interpreter) torpedoSimple(mode string, args []string, conn net.Conn, n
 	// Fire multiple torpedos based on numTorps parameter
 	// Removed unused variable hitType
 
+	burstAborted := false // mirrors decwar iflg: set negative on misfire to abort remaining torpedoes
 	for torpCount := 0; torpCount < numTorps; torpCount++ {
+		// Decwar: if (iflg .lt. 0) goto 2400 — skip remaining torpedoes after a misfire
+		if burstAborted {
+			break
+		}
 		//start move
 
 		// Add a call to torpedoPathLocked here to get the actual vpos, hpos
 		deflection := i.calculateTorpedoDeflection(myShip)
+
+		// Decwar misfire check: iran(100) > 96, i.e. 4% chance per torpedo.
+		// The misfired torpedo still travels — just with extra deflection.
+		// The remainder of the burst is aborted (iflg = -1).
+		// There is also a 1-in-5 chance of photon tube damage on a misfire.
+		if rand.Intn(100) > 96 {
+			result += fmt.Sprintf("Torpedo %d MISFIRES!\n\r", torpCount+1)
+			deflection += (rand.Float64() - 0.5) / 5.0 // decwar: d = d + (ran(0)-0.5)/5.0
+			burstAborted = true                         // abort torpedoes after this one
+			// Decwar: if (iran(5) .ne. 5) goto 900 — 1-in-5 chance of tube damage
+			if rand.Intn(5) == 0 {
+				i.objects[myShipIdx].TorpedoTubeDamage += 500 + rand.Intn(3000) // decwar: 500 + iran(3000)
+				result += "PHOTON TUBES DAMAGED!\n\r"
+			}
+		}
+
 		actualTargetIdx, objectfound, endX, endY := i.torpedoPathLocked(myShip.LocationX, myShip.LocationY, vpos, hpos, connInfo.Galaxy, deflection)
 		if i.objects[myShipIdx].TorpedoTubes < 1 {
 			return fmt.Sprintf("Insufficient torpedoes for burst!\n\r%d torpedos left.\n\r", i.objects[myShipIdx].TorpedoTubes)
